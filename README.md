@@ -245,9 +245,9 @@ Notifications are stored in the `notifications` table (Laravel database notifica
 Set in `.env` (read via `config/services.php`):
 
 ```env
-SHOPIFY_STORE_DOMAIN=my-shop.myshopify.com   # domain only, no https:// or trailing slash
-SHOPIFY_ACCESS_TOKEN=shpat_xxxxxxxxxxxxxxxx   # Admin API access token
-SHOPIFY_COLLECTION_ID=464337174767            # numeric collection id
+SHOPIFY_STORE_DOMAIN=xxx.com   # domain only, no https:// or trailing slash
+SHOPIFY_ACCESS_TOKEN=xxxxxxx   # Admin API access token
+SHOPIFY_COLLECTION_ID=xxxxx            # numeric collection id
 SHOPIFY_API_VERSION=2024-10
 ```
 
