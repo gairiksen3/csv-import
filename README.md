@@ -177,6 +177,28 @@ php artisan queue:work --tries=3 --timeout=180
 > After changing code, restart the worker (`php artisan queue:restart`) — workers hold code
 > in memory.
 
+#### Auto‑starting the queue worker on Windows (no admin needed)
+
+So uploads never get stuck at `pending` again, the worker can start automatically
+at every Windows logon — no need to remember `queue:work`:
+
+- `scripts/queue-worker.bat` — runs the worker in a self‑restarting loop
+  (`--max-time=3600` so it relaunches hourly with fresh code/memory; restarts on crash).
+- A hidden launcher (`CsvImportQueueWorker.vbs`) is placed in your user **Startup**
+  folder (`shell:startup`), so the worker starts—invisibly—every time you log in.
+
+To **manage** it:
+
+- **Disable:** delete `CsvImportQueueWorker.vbs` from your Startup folder
+  (run `shell:startup` from the Win+R box to open it).
+- **Run it now without logging out:** double‑click the `.vbs`, or run
+  `scripts/queue-worker.bat` in a terminal.
+- **Logs:** restarts are recorded in `storage/logs/queue-worker.log`.
+
+> A true Windows **service** (via NSSM or `sc`) or a **Scheduled Task** are also
+> options, but both require **Administrator** rights. The Startup‑folder launcher
+> above needs none and achieves the same "always running" result for a dev box.
+
 #### One‑command alternative (server + queue + logs + vite)
 
 ```bash
